@@ -40,16 +40,15 @@ class GFG {
 class Solution {
     public List<List<Integer>> printGraph(int V, int edges[][]) {
         List<List<Integer>> ans = new ArrayList<>();
-        for (int i = 0; i < V; i++) {
-        ans.add(new ArrayList<>()); // Initialize a list for each vertex
-}
-
-        for (int[] edge : edges) {
-        int u = edge[0];  // From vertex
-        int v = edge[1];  // To vertex
-        ans.get(u).add(v);  // Add the edge to the adjacency list of vertex u
-        ans.get(v).add(u);
-}
+        for(int i=0; i<V; i++){
+            ans.add(new ArrayList<>());
+        }
+        for(int edge[] : edges){
+            int u = edge[0];
+            int v = edge[1];
+            ans.get(u).add(v);
+            ans.get(v).add(u);
+        }
         return ans;
     }
 }
