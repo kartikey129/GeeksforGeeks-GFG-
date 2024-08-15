@@ -39,16 +39,17 @@ class GFG {
 //User function Template for Java
 class Solution {
     public List<List<Integer>> printGraph(int V, int edges[][]) {
-        List<List<Integer>> ans = new ArrayList<>();
-        for(int i=0; i<V; i++){
-            ans.add(new ArrayList<>());
-        }
-        for(int edge[] : edges){
-            int u = edge[0];
-            int v = edge[1];
-            ans.get(u).add(v);
-            ans.get(v).add(u);
-        }
-        return ans;
+       List<List<Integer>> ans = new ArrayList<>();
+       List<Integer> ls = new ArrayList<>();
+       for(int i=0; i<V; i++){
+           ans.add(new ArrayList<>(ls));
+       }
+       for(int []it: edges){
+           int u = it[0];
+           int v = it[1];
+           ans.get(u).add(v);
+           ans.get(v).add(u);
+       }
+       return ans;
     }
 }
