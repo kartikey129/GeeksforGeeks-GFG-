@@ -33,15 +33,19 @@ class GFG{
 class Solution{
     public int minimumEnergy(int arr[],int N){
         //code here
-        int dp[] = new int[N];
-        dp[0]=0;
+        if(N==0) return 0;
+        int prev = 0;
+        int prev2 = 0;
         for(int i=1; i<N ; i++){
-            int fs = dp[i-1] + Math.abs(arr[i] - arr[i-1]);
+            int fs =prev + Math.abs(arr[i]-arr[i-1]);
             int ss = Integer.MAX_VALUE;
-            if(i>1)
-            ss = dp[i-2] + Math.abs(arr[i] - arr[i-2]);
-            dp[i] = Math.min(fs , ss);
+            if(i>1){
+                ss = prev2 + Math.abs(arr[i] - arr[i-2]);
+            }
+            int curri = Math.min(fs,ss);
+            prev2 = prev;
+            prev = curri;
         }
-        return dp[N-1];
+        return prev;
     }
 }
