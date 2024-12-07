@@ -36,21 +36,22 @@ class Solution {
     ArrayList<Integer> findTwoElement(int arr[]) {
         // code here
         ArrayList<Integer> ans = new ArrayList<>();
-        int n = arr.length;
-        int indxarr[] = new int[n];
-        int sum = 0;
+        long n = arr.length;
+        long s2 = 0;
+        long s2n = 0;
+        long s1 = (n*(n+1))/2;
+        long sn = (n*(n+1)*(2*n+1))/6;
         for(int i=0;i<n;i++){
-            sum += arr[i];
-            indxarr[arr[i]-1]++;
+            s2 += arr[i];
+            s2n+=(long)arr[i]*(long)arr[i];
         }
-        for(int i=0;i<n;i++){
-            if(indxarr[i]==2)
-            ans.add(i+1);
-        }
-        for(int i=0; i<n ; i++){
-            if(indxarr[i]==0)
-            ans.add(i+1);
-        }
+        long val1 = s2-s1;
+        long val2 = s2n-sn;
+        val2 = val2/val1;
+        long x = (val1+val2)/2;
+        long y = x-val1;
+        ans.add((int)x);
+        ans.add((int)y);
         return ans;
     }
 }
