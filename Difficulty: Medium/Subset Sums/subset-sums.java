@@ -1,51 +1,53 @@
 //{ Driver Code Starts
-
-// Initial Template for Java
 import java.io.*;
 import java.util.*;
 
-class GFG {
-    public static void main(String args[]) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        while (t-- > 0) {
-            int N = sc.nextInt();
-            ArrayList<Integer> arr = new ArrayList<>();
-            for (int i = 0; i < N; i++) {
-                arr.add(sc.nextInt());
+class Geeks {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine()); // Number of test cases
+        for (int g = 0; g < t; g++) {
+            String[] str =
+                (br.readLine()).trim().split(" "); // Reading input as a string array
+            int arr[] = new int[str.length]; // Creating integer array from the input
+            for (int i = 0; i < str.length; i++) {
+                arr[i] = Integer.parseInt(str[i]);
             }
-            Solution ob = new Solution();
 
-            ArrayList<Integer> ans = ob.subsetSums(arr, N);
-            Collections.sort(ans);
-            for (int sum : ans) {
-                System.out.print(sum + " ");
+            // Getting the result from the Solution class
+            ArrayList<Integer> result = new Solution().subsetSums(arr);
+            Collections.sort(result);
+            // Printing the result in space-separated format
+            for (int i = 0; i < result.size(); i++) {
+                if (i != 0) System.out.print(" ");
+                System.out.print(result.get(i));
             }
-            System.out.println();
+            System.out.println();    // Print new line after each test case
+            System.out.println("~"); // Print new line after each test case
         }
     }
 }
+
 // } Driver Code Ends
 
 
 // User function Template for Java//User function Template for Java
 class Solution {
-    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int n) {
+    public ArrayList<Integer> subsetSums(int[] arr) {
         // code here
         ArrayList<Integer> ans = new ArrayList<>();
-        subsetSums(arr,n,0,0,ans);
+        ans.add(0);
+        subsetSumsHelper(arr,ans,0,0);
         return ans;
     }
-    public void subsetSums(ArrayList<Integer> arr,int n,int ind,int s,ArrayList<Integer> ans ){
-        if(ind==n){
-            ans.add(s);
+    public void subsetSumsHelper(int[] arr , ArrayList<Integer> ans,int ind,int sum){
+        if(arr.length==ind){
             return;
         }
-        //include
-        s+=arr.get(ind);
-        subsetSums(arr,n,ind+1,s,ans);
-        //exclude
-        s-=arr.get(ind);
-        subsetSums(arr,n,ind+1,s,ans);
+        sum+=arr[ind];
+        ans.add(sum);
+        subsetSumsHelper(arr,ans,ind+1,sum);
+        sum-=arr[ind];
+        subsetSumsHelper(arr,ans,ind+1,sum);
     }
 }
