@@ -47,23 +47,23 @@ public class Main {
 // } Driver Code Ends
 
 // User function Template for Java
+
 class Solution {
     int minCost(int[] arr) {
         // code here
         int N = arr.length;
-        int previ = 0;
-        int prev2=0;
+        int dp[] = new int[N];
+        dp[0]=0;
         for(int i=1; i<N ; i++){
-            int fs = previ + Math.abs(arr[i] - arr[i-1]);
+            int fs = dp[i-1] + Math.abs(arr[i] - arr[i-1]);
             int ss = Integer.MAX_VALUE;
             if(i>1)
-            ss = prev2 + Math.abs(arr[i] - arr[i-2]);
-            int curri = Math.min(fs , ss);
-            prev2 = previ;
-            previ = curri;
+            ss = dp[i-2] + Math.abs(arr[i] - arr[i-2]);
+            dp[i] = Math.min(fs , ss);
         }
-        return previ;
-    }
+        return dp[N-1];
+
+    }   
 }
 
 
